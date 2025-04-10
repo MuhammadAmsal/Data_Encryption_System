@@ -1,0 +1,27 @@
+/* style.css */
+h1, h2, h3, h4 {
+    color: #4CAF50;
+}
+
+.stButton>button {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.stTextInput>div>input {
+    border-radius: 5px;
+}
+
+.data-box {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.hidden-key {
+    color: grey;
+    letter-spacing: 2px;
+}
