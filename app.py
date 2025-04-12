@@ -46,6 +46,7 @@ def caesar_decrypt(text, key):
     return caesar_encrypt(text, -int(key))
 
 
+
 # Login Page
 def login():
     st.title("🔐 Login")
@@ -61,6 +62,7 @@ def login():
             st.session_state.login_attempts = 0
             st.session_state.logged_in = True  # Set the logged-in state
             st.success("Login Successful!")
+            st.rerun()
              # This will automatically rerun the app to show the dashboard
 
         else:
@@ -73,8 +75,7 @@ def login():
             time.sleep(2)  # Delay for UX before stopping
             st.session_state.login_attempts = 0  # Reset attempts after 3 failed logins
 
-
-    st.markdown("Don't have an account? [Register here](#register)")
+            
 
 
 # Register Page
@@ -94,9 +95,10 @@ def register():
 
 # Encrypt Page
 def encrypt_page():
-    st.title("🔒 Encrypt Data")
+    st.title("🔐 Data Encryption System")
+    st.subheader("📥 Store Data")
 
-    text = st.text_area("Enter your text")
+    text = st.text_area("Enter your text For Encryption")
     key = st.text_input("Enter Numeric Key")
 
     if st.button("Encrypt"):
@@ -111,9 +113,10 @@ def encrypt_page():
 
 # Decrypt Page
 def decrypt_page():
-    st.title("🔓 Decrypt Data")
+    st.title("🔐 Data Encryption System")
+    st.subheader("📤 Decrypt Stored Data")
 
-    cipher_text = st.text_area("Enter Cipher Text")
+    cipher_text = st.text_area("Enter Encrypted Text")
     key = st.text_input("Enter Key")
 
     if st.button("Decrypt"):
@@ -139,7 +142,8 @@ def decrypt_page():
 
 # View Stored Data Page
 def view_data():
-    st.title("📂 Stored Encrypted Data")
+    st.title("🔐 Data Encryption System")
+    st.subheader("📤 Retrieve Stored Data")
 
     user_data = st.session_state.data.get(st.session_state.current_user, [])
 
@@ -161,11 +165,11 @@ def view_data():
 # Main App Logic
 if st.session_state.current_user:
     st.sidebar.title(f"Welcome, {st.session_state.current_user}")
-    page = st.sidebar.selectbox("Navigate", ["Encrypt", "Decrypt", "Stored Data", "Logout"])
+    page = st.sidebar.selectbox("Navigate", ["Encrypt Data", "Decrypt Data", "Stored Data", "Logout"])
 
-    if page == "Encrypt":
+    if page == "Encrypt Data":
         encrypt_page()
-    elif page == "Decrypt":
+    elif page == "Decrypt Data":
         decrypt_page()
     elif page == "Stored Data":
         view_data()
@@ -173,6 +177,7 @@ if st.session_state.current_user:
         st.session_state.current_user = None  # Clear current user
         # No need for rerun here, Streamlit will handle the logout automatically
         st.success("Logged out successfully!")
+        st.rerun()
 
 else:
     page = st.sidebar.selectbox("Choose", ["Login", "Register"])
